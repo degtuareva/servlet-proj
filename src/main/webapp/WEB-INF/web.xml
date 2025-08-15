@@ -58,6 +58,10 @@
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>org.example.servlets.LoginServlet</servlet-class>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>123456</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>

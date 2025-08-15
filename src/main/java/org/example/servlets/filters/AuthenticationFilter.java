@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
@@ -23,9 +22,11 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String path = req.getRequestURI().substring(req.getContextPath().length());
+        String method = req.getMethod();
 
-        // Пути, доступные без аутентификации
-        boolean loginRequest = path.equals("/login") || path.equals("/login.html") || path.startsWith("/static/");
+        boolean loginRequest = (path.equals("/login") && (method.equals("GET") || method.equals("POST")))
+                || path.equals("/login.html")
+                || path.startsWith("/static/");
 
         HttpSession session = req.getSession(false);
         boolean loggedIn = (session != null);

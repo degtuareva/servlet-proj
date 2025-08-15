@@ -10,8 +10,12 @@ import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
 
-    private final String passwordCred = "123456";
+    private String passwordCred;
 
+    @Override
+    public void init() {
+        passwordCred = getServletConfig().getInitParameter("password");
+    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Перенаправляем пользователя на статическую html страницу с формой(без нее работает ввод пароля!)
